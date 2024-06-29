@@ -117,7 +117,7 @@ urlpatterns = [
 
 
     # Student
-   path("student/home/", student_views.student_home, name='student_home'),
+    path("student/home/", student_views.student_home, name='student_home'),
     path("student/view_attendance/", student_views.student_view_attendance, name='student_view_attendance'),
     path("student/apply_leave/", student_views.student_apply_leave, name='student_apply_leave'),
     path("student/feedback/", student_views.student_feedback, name='student_feedback'),
@@ -128,4 +128,9 @@ urlpatterns = [
     path("student/mcq_ask/", student_views.student_mcq_ask, name='student_mcq_ask'),
     path("student/generate_mcq/", student_views.student_generate_mcq, name='student_generate_mcq'),
     path("student/quiz_result/", student_views.student_quiz_result, name='student_quiz_result'),
+    
+    path("chatbot/",include('chatbot.urls')),
+    path('student/career_recommend/', student_views.career_recommend, name='career_recommend'),
+    path('student/get_career_path/', student_views.get_career_path_view, name='get_career_path'),
+    
 ]

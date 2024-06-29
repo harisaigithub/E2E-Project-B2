@@ -348,3 +348,24 @@ def student_quiz_result(request):
                     score += 1
         return render(request, 'student_template/student_quiz_result.html', {'score': score, 'total': total_questions})
     return redirect('student_mcq_ask')
+
+
+
+# myapp/views.py
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .utils import get_career_path
+import json
+
+@csrf_exempt
+def get_career_path_view(request):
+    if request.method == 'POST': 
+        user_data = request.POST.get('user_data')
+        career_path = get_career_path(user_data)
+        return JsonResponse({'career_path': career_path}, json_dumps_params={'indent': 2})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+def career_recommend(request):
+    return render(request, 'student_template/career_recommend.html')

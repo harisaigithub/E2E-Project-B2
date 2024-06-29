@@ -50,6 +50,14 @@ from textblob import TextBlob
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from textblob import TextBlob 
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .utils import get_career_path
+
+
 # Create your views here.
 
 
@@ -373,6 +381,8 @@ def student_mcq_ask(request):
         form = UploadFileForm()
     return render(request, 'student_template/student_mcq_ask.html', {'form': form})
 
+
+
 def handle_uploaded_file(uploaded_file):
     questions = []
     file_path = uploaded_file.file.path  # Get the full path to the uploaded file
@@ -464,3 +474,24 @@ def student_quiz_result(request):
                     score += 1
         return render(request, 'student_template/student_quiz_result.html', {'score': score, 'total': total_questions})
     return redirect('student_mcq_ask')
+
+
+
+# myapp/views.py
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .utils import get_career_path
+import json
+
+@csrf_exempt
+def get_career_path_view(request):
+    if request.method == 'POST': 
+        user_data = request.POST.get('user_data')
+        career_path = get_career_path(user_data)
+        return JsonResponse({'career_path': career_path}, json_dumps_params={'indent': 2})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+def career_recommend(request):
+    return render(request, 'student_template/career_recommend.html')
