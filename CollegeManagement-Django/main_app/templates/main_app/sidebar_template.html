@@ -525,13 +525,28 @@
                                             {% url 'student_mcq_ask' as student_mcq_ask %}
                                             <a href="{{student_mcq_ask}}"
                                                 class="nav-link {% if student_mcq_ask == request.path %} active {% endif %}">
-                                                <i class="nav-icon fas fa-comment-alt"></i>
+                                                <i class="fas fa-puzzle-piece"></i>
                                                 <p>
                                                     Customized Quizzess
 
                                                 </p>
                                             </a>
                                         </li>
+
+                                        <li class="nav-item">
+                                            {% url 'career_recommend' as career_recommend %}
+                                            <a href="{{career_recommend}}"
+                                                class="nav-link {% if career_recommend == request.path %} active {% endif %}">
+                                                <i class="fas fa-briefcase"></i>
+                                                <p>
+                                                    Career Recommender
+
+                                                </p>
+                                            </a>
+                                        </li>
+
+                                        
+                                        
 
                                         {% endif %}
 
