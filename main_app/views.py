@@ -44,6 +44,7 @@ from django.utils import translation
 import nltk
 from nltk.tokenize import sent_tokenize
 import fitz
+import PyMuPDF
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from textblob import TextBlob
