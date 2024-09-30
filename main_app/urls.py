@@ -133,8 +133,11 @@ urlpatterns = [
     path("student/mcq_ask/", student_views.student_mcq_ask, name='student_mcq_ask'),
     path("student/generate_mcq/", student_views.student_generate_mcq, name='student_generate_mcq'),
     path("student/quiz_result/", student_views.student_quiz_result, name='student_quiz_result'),
+<<<<<<< HEAD:main_app/urls.py
     path('student-view-notes',student_views.student_view_notes,name='student_view_notes'),
     path('download/<int:note_id>/', student_views.download_file, name='download_note'),
+=======
+>>>>>>> 48762d028550b31696796fa0315257485441e90d:CollegeManagement-Django/main_app/urls.py
     
     path("chatbot/",include('chatbot.urls')),
     path('student/career_recommend/', student_views.career_recommend, name='career_recommend'),
