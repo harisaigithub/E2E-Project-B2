@@ -13,14 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, include
 
 from main_app.EditResultView import EditResultView
-
 from . import hod_views, staff_views, student_views, views
-from . import views as student_views
-from django.urls import path,include,re_path
-from main_app import views
 
 urlpatterns = [
     path("", views.login_page, name='login_page'),
@@ -67,16 +63,12 @@ urlpatterns = [
     path("staff/edit/<int:staff_id>", hod_views.edit_staff, name='edit_staff'),
     path("staff/delete/<int:staff_id>",
          hod_views.delete_staff, name='delete_staff'),
-
     path("course/delete/<int:course_id>",
          hod_views.delete_course, name='delete_course'),
-
     path("subject/delete/<int:subject_id>",
          hod_views.delete_subject, name='delete_subject'),
-
     path("session/delete/<int:session_id>",
          hod_views.delete_session, name='delete_session'),
-
     path("student/delete/<int:student_id>",
          hod_views.delete_student, name='delete_student'),
     path("student/edit/<int:student_id>",
@@ -85,7 +77,6 @@ urlpatterns = [
          hod_views.edit_course, name='edit_course'),
     path("subject/edit/<int:subject_id>",
          hod_views.edit_subject, name='edit_subject'),
-
 
     # Staff
     path("staff/home/", staff_views.staff_home, name='staff_home'),
@@ -113,13 +104,10 @@ urlpatterns = [
          name='edit_student_result'),
     path('staff/result/fetch/', staff_views.fetch_student_result,
          name='fetch_student_result'),
-    path('teacher-notes',staff_views.teacher_notes,name='teacher_notes'),
-    path('teacher-upload-notes',staff_views.teacher_upload_notes,name='teacher_upload_notes'),
-    path('teacher-view-notes',staff_views.teacher_view_notes,name='teacher_view_notes'),
+    path('teacher-notes', staff_views.teacher_notes, name='teacher_notes'),
+    path('teacher-upload-notes', staff_views.teacher_upload_notes, name='teacher_upload_notes'),
+    path('teacher-view-notes', staff_views.teacher_view_notes, name='teacher_view_notes'),
     path('teacher/delete-note/<int:note_id>/', staff_views.delete_note, name='delete_note'),
-
-
-
 
     # Student
     path("student/home/", student_views.student_home, name='student_home'),
@@ -133,14 +121,11 @@ urlpatterns = [
     path("student/mcq_ask/", student_views.student_mcq_ask, name='student_mcq_ask'),
     path("student/generate_mcq/", student_views.student_generate_mcq, name='student_generate_mcq'),
     path("student/quiz_result/", student_views.student_quiz_result, name='student_quiz_result'),
-<<<<<<< HEAD:main_app/urls.py
-    path('student-view-notes',student_views.student_view_notes,name='student_view_notes'),
+    path('student-view-notes', student_views.student_view_notes, name='student_view_notes'),
     path('download/<int:note_id>/', student_views.download_file, name='download_note'),
-=======
->>>>>>> 48762d028550b31696796fa0315257485441e90d:CollegeManagement-Django/main_app/urls.py
-    
-    path("chatbot/",include('chatbot.urls')),
+
+    # Chatbot integration
+    path("chatbot/", include('chatbot.urls')),
     path('student/career_recommend/', student_views.career_recommend, name='career_recommend'),
     path('student/get_career_path/', student_views.get_career_path_view, name='get_career_path'),
-    
 ]
