@@ -31,7 +31,7 @@ from langdetect import detect, DetectorFactory, LangDetectException
 from django.utils import translation
 import nltk
 from nltk.tokenize import sent_tokenize
-import fitz
+import fitz  # PyMuPDF
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from textblob import TextBlob
