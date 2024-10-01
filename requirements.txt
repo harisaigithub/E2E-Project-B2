@@ -28,7 +28,6 @@ en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_
 es-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.7.0/es_core_news_sm-3.7.0-py3-none-any.whl#sha256=61e6e5530941f5880166855f09f60d7e6ba79ec1e8e45f96244bdb1eb169eb1d
 etelemetry==0.3.1
 filelock==3.13.1
-fitz==0.0.1.dev2
 frozenlist==1.4.1
 fsspec==2024.6.0
 google-ai-generativelanguage==0.6.5
@@ -89,7 +88,6 @@ pydantic_core==2.18.4
 pydot==2.0.0
 Pygments==2.18.0
 PyMuPDF==1.18.19  # or the latest stable version
-PyMuPDFb==1.24.3
 pyparsing==3.1.2
 PyPDF2==3.0.1
 python-dateutil==2.9.0.post0
