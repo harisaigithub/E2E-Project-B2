@@ -6,8 +6,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-
-
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         email = self.normalize_email(email)
@@ -41,8 +39,7 @@ class Session(models.Model):
 class CustomUser(AbstractUser):
     USER_TYPE = ((1, "HOD"), (2, "Staff"), (3, "Student"))
     GENDER = [("M", "Male"), ("F", "Female")]
-    
-    
+
     username = None  # Removed username, using email instead
     email = models.EmailField(unique=True)
     user_type = models.CharField(default=1, choices=USER_TYPE, max_length=1)
@@ -52,6 +49,23 @@ class CustomUser(AbstractUser):
     fcm_token = models.TextField(default="")  # For firebase notifications
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Added related_name to avoid reverse accessor clashes
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_groups',
+        blank=True,
+        help_text='The groups this user belongs to.',
+        verbose_name='groups'
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_user_permissions',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions'
+    )
+
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
@@ -62,7 +76,6 @@ class CustomUser(AbstractUser):
 
 class Admin(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-
 
 
 class Course(models.Model):
@@ -93,7 +106,7 @@ class Staff(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=120)
-    staff = models.ForeignKey(Staff,on_delete=models.CASCADE,)
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -201,16 +214,14 @@ class Note(models.Model):
     topic = models.CharField(max_length=100)
     notes_file = models.FileField(max_length=100)
 
-
     def __str__(self):
         return self.notes_file
-
-
 
 
 class UploadedFile(models.Model):
     file = models.FileField(upload_to='uploads/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
 
 class MCQQuestion(models.Model):
     question = models.TextField()

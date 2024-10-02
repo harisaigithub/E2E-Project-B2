@@ -9,6 +9,7 @@ from django.shortcuts import (HttpResponseRedirect, get_object_or_404,
                               redirect, render)
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 from .forms import *
 from .models import *
